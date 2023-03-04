@@ -9,10 +9,15 @@ namespace dice_roller
             return System.IO.File.ReadAllText(file);
         }
 
-        public static List<string> RecursiveImport(String root)
+        public static List<string> RecursiveImport(string root)
+        {
+            return RecursiveImport(root, "*");
+        }
+
+        public static List<string> RecursiveImport(string root, string extension)
         {
             List<string> holder = new List<string>();
-            foreach (string file in Directory.EnumerateFiles(root, "*.*", SearchOption.AllDirectories))
+            foreach (string file in Directory.EnumerateFiles(root, "*." + extension, SearchOption.AllDirectories))
             {
                 holder.Add(ReadFile(file));
             }
