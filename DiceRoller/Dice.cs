@@ -13,7 +13,7 @@ namespace dice_roller {
 
         public int Seed {
             get { return _seed; }
-            set { _rand = new Random(GenSeed()); }
+            set { _rand = new Random(value); }
         }
 
         public int GenSeed() {
@@ -22,6 +22,11 @@ namespace dice_roller {
 
         public int Roll(int sides) {
             return _rand.Next(sides) + 1;
+        }
+
+        public double RollBetween(double lesser, double greater)
+        {
+            return Math.Round((_rand.NextDouble() * (greater-lesser)) + lesser, 2);
         }
 
         public int RollMany(int number, int sides) {
