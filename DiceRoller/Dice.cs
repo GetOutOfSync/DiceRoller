@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace dice_roller {
     public class Dice {
 
@@ -20,6 +22,37 @@ namespace dice_roller {
             return _rand.Next();
         }
 
+        /// <summary>
+        /// Generates a list of non-repeating random integers from a given range
+        /// </summary>
+        /// <param name="startRange">The start of the range from which random integers are selected</param>
+        /// /// <param name="endRange">The end of the range from which random integers are selected. This integer will be included in the range.</param>
+        /// <param name="number">The number of random integers to select</param>
+        /// <returns>A list of randomly selected integers</returns>
+        public List<int> GenNonRepeatList(int startRange, int endRange, int number)
+        {
+            List<int> list = new List<int>();
+            for (int i = startRange; i <= endRange; i++) { list.Add(i); }
+            return GenNotRepeatList(list, number);
+        }
+
+        /// <summary>
+        /// Generates a list of non-repeating random integers from a given list
+        /// </summary>
+        /// <param name="list">The input list from which random integers are selected</param>
+        /// <param name="number">The number of random integers to select</param>
+        /// <returns>A list of randomly selected integers</returns>
+        public List<int> GenNotRepeatList(List<int> list, int number)
+        {
+            List<int> holder = new List<int>();
+            for (int i = 0; i < number; i++)
+            {
+                holder.Add(RollOnList(list));
+                list.Remove(holder[i]);
+            }
+            return holder;
+        }
+
         public int Roll(int sides) {
             return _rand.Next(sides) + 1;
         }
@@ -27,6 +60,16 @@ namespace dice_roller {
         public double RollBetween(double lesser, double greater)
         {
             return Math.Round((_rand.NextDouble() * (greater-lesser)) + lesser, 2);
+        }
+
+        public T RollOnList<T> (List<T> list)
+        {
+            return list[Roll(list.Count - 1)];
+        }
+
+        public T RollOnArray<T>(T[] array)
+        {
+            return array[Roll(array.Length - 1)];
         }
 
         public int RollMany(int number, int sides) {
