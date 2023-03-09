@@ -6,7 +6,7 @@ namespace dice_roller
     public class ChanceTable
     {
         private ChanceResult[] _table;
-        private String _name;
+        private string _name;
         private int _totalChance;
 
         public ChanceTable(String name, ChanceResult[] table)
@@ -38,7 +38,7 @@ namespace dice_roller
             get { return _totalChance; }
         }
 
-        public String Name
+        public string Name
         {
             get { return _name; }
             set { _name = value; }
