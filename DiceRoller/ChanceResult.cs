@@ -14,12 +14,18 @@ namespace dice_roller
             _result = result;
         }
 
+        /// <summary>
+        /// The weight this result has when rolling.
+        /// </summary>
         public int Chance
         {
             get { return _chance; }
             set { _chance = value; }
         }
 
+        /// <summary>
+        /// The string which will be passed on if this element is selected.
+        /// </summary>
         public string Result
         {
             get { return _result; }

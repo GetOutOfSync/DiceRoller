@@ -21,6 +21,11 @@ namespace dice_roller
             }
         }
 
+        /// <summary>
+        /// Will return the value of the selected ChanceResult.
+        /// </summary>
+        /// <param name="roll"></param>
+        /// <returns>The string of the associated rolled element</returns>
         public string GetResult(int roll)
         {
             int comp = 0;
@@ -32,18 +37,27 @@ namespace dice_roller
             return "null";
         }
 
+        /// <summary>
+        /// The total range of weights which appear on the table. Used to randomly select elements.
+        /// </summary>
         [JsonIgnoreAttribute]
         public int TotalChance
         {
             get { return _totalChance; }
         }
 
+        /// <summary>
+        /// Name of the table. Used when searching for certain tables.
+        /// </summary>
         public string Name
         {
             get { return _name; }
             set { _name = value; }
         }
 
+        /// <summary>
+        /// The table of possible results and their weights.
+        /// </summary>
         public ChanceResult[] Table
         {
             get { return _table; }
