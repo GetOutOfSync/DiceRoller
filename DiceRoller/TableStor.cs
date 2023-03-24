@@ -1,52 +1,53 @@
-﻿using Newtonsoft.Json;
-using System.Collections;
+﻿namespace dice_roller;
 
-namespace dice_roller
+public class TableStore
 {
-    public class TableStore
+    public List<ChanceTable> _chanceTables;
+    
+    public TableStore() 
+    { 
+        _chanceTables = new List<ChanceTable>();
+    }
+
+    /// <summary>
+    /// Finds and returns the stored ChanceTable object based on the provided name, case insensitive.
+    /// </summary>
+    /// <param name="name">The name of the table to search for</param>
+    /// <returns>The ChanceTable object for follow-on processing</returns>
+    public ChanceTable GetTable(string name)
     {
-        public List<ChanceTable> _chanceTables;
-        
-        public TableStore() 
-        { 
-            _chanceTables = new List<ChanceTable>();
-        }
-
-        public ChanceTable GetTable(String name)
+        foreach (ChanceTable table in _chanceTables)
         {
-            foreach (ChanceTable table in _chanceTables)
-            {
-                if (table.Name == name) { return table; }
-            }
-            return null;
+            if (table.Name.ToUpper() == name.ToUpper()) { return table; }
         }
+        return null;
+    }
 
-        public List<string> GetTableNames()
+    /// <returns>A list of all stored table names.</returns>
+    public List<string> GetTableNames()
+    {
+        List<string> names = new List<string>();
+        foreach (ChanceTable table in _chanceTables)
         {
-            List<string> names = new List<string>();
-            foreach (ChanceTable table in _chanceTables)
-            {
-                names.Add(table.Name);
-            }
-            return names;
+            names.Add(table.Name);
         }
+        return names;
+    }
 
-        public void ImportProfile(String root)
+    /*public void ImportProfile(string root)
+    {
+        foreach(string json in FileWorker.RecursiveImport(root, "json"))
         {
-            foreach(string json in FileWorker.RecursiveImport(root, "json"))
-            {
-                _chanceTables.Add(ConvertTable(json));
-            }
+            _chanceTables.Add(ConvertTable(json));
         }
+    }*/
 
-        public void ImportTable(String file)
-        {
-            _chanceTables.Add(ConvertTable(FileWorker.ReadFile(file)));
-        }
-
-        private ChanceTable ConvertTable(string json)
-        {
-            return JsonConvert.DeserializeObject<ChanceTable>(json) ?? throw new InvalidOperationException();
-        }
+    /// <summary>
+    /// Creates and adds a ChanceTable based on json retrieved from a given file.
+    /// </summary>
+    /// <param name="file">File which stores json</param>
+    public void ImportTable(string file)
+    {
+        _chanceTables.Add(ChanceTable.FromJson(FileWorker.ReadFile(file)));
     }
 }
