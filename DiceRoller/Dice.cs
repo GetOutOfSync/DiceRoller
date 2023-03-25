@@ -36,12 +36,24 @@ public class Dice {
     /// <param name="number">Number of dice rolls</param>
     /// <param name="sides">Number of sides the dice has</param>
     /// <returns>An integer between (s) and (n)*(s)</returns>
-    public int RollMany(int number, int sides) {
+    public int Roll(int number, int sides)
+    {
         int result = 0;
-        for (int i = 0; i < number; i++) {
+        for (int i = 0; i < number; i++)
+        {
             result += this.Roll(sides);
         }
         return result;
+    }
+
+    /// <summary>
+    /// Simulates (n) dice rolls on an (s) sided dice. Similar to RPG dice notation, like 2d6. Results range from (s) to (n)*(s)
+    /// </summary>
+    /// <param name="number">Number of dice rolls</param>
+    /// <param name="sides">Number of sides the dice has</param>
+    /// <returns>An integer between (s) and (n)*(s)</returns>
+    public int RollMany(int number, int sides) {
+        return Roll(number, sides);
     }
 
     /// <summary>
@@ -75,7 +87,7 @@ public class Dice {
         for (int i = 0; i < operators.Length; i++) {
             switch (operators[i]) {
                 case 'd':
-                    holder += RollMany(Int32.Parse(NumArray[i]), Int32.Parse(NumArray[i + 1]));
+                    holder += Roll(Int32.Parse(NumArray[i]), Int32.Parse(NumArray[i + 1]));
                     break;
                 case '+':
                     holder += Int32.Parse(NumArray[i + 1]);
