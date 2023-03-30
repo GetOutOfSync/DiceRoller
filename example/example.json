@@ -1,0 +1,21 @@
+{
+  "Name": "example",
+  "Table": [
+    {
+      "Chance": 2,
+      "Result": "Cat"
+    },
+    {
+      "Chance": 3,
+      "Result": "Dog"
+    },
+    {
+      "Chance": 1,
+      "Result": "Fish"
+    },
+    {
+      "Chance": 1,
+      "Result": "Snake"
+    }
+  ]
+}
