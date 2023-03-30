@@ -168,5 +168,75 @@ namespace dice_roller {
             }
             return holder;
         }
+
+        /// <summary>
+        /// Gets the minimum possible result from a passed string
+        /// </summary>
+        /// <param name="s">String to parse</param>
+        /// <returns>Minimum possible result from rolling on a passed string</returns>
+        public static int ParseStringMin(string s)
+        {
+            string[] NumArray = s.Split(new char[] { 'd', '+', '/', '-', '*' });
+            if (NumArray.Length == 1) return Int32.Parse(NumArray[0]);
+            string operators = ExtensionMethods.StripNumbers(s);
+            int holder = 0;
+            for (int i = 0; i < operators.Length; i++)
+            {
+                switch (operators[i])
+                {
+                    case 'd':
+                        holder += Int32.Parse(NumArray[i]);
+                        break;
+                    case '+':
+                        holder += Int32.Parse(NumArray[i + 1]);
+                        break;
+                    case '-':
+                        holder -= Int32.Parse(NumArray[i + 1]);
+                        break;
+                    case '*':
+                        holder *= Int32.Parse(NumArray[i + 1]);
+                        break;
+                    case '/':
+                        holder /= Int32.Parse(NumArray[i + 1]);
+                        break;
+                }
+            }
+            return holder;
+        }
+
+        /// <summary>
+        /// Gets the maximum possible result from a passed string
+        /// </summary>
+        /// <param name="s">String to parse</param>
+        /// <returns>Maximum possible result from rolling on a passed string</returns>
+        public static int ParseStringMax(string s)
+        {
+            string[] NumArray = s.Split(new char[] { 'd', '+', '/', '-', '*' });
+            if (NumArray.Length == 1) return Int32.Parse(NumArray[0]);
+            string operators = ExtensionMethods.StripNumbers(s);
+            int holder = 0;
+            for (int i = 0; i < operators.Length; i++)
+            {
+                switch (operators[i])
+                {
+                    case 'd':
+                        holder += (Int32.Parse(NumArray[i]) * Int32.Parse(NumArray[i + 1]));
+                        break;
+                    case '+':
+                        holder += Int32.Parse(NumArray[i + 1]);
+                        break;
+                    case '-':
+                        holder -= Int32.Parse(NumArray[i + 1]);
+                        break;
+                    case '*':
+                        holder *= Int32.Parse(NumArray[i + 1]);
+                        break;
+                    case '/':
+                        holder /= Int32.Parse(NumArray[i + 1]);
+                        break;
+                }
+            }
+            return holder;
+        }
     }
 }

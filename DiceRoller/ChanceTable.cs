@@ -9,7 +9,7 @@ namespace dice_roller
         private string _name;
         private int _totalChance;
 
-        public ChanceTable(String name, ChanceResult[] table)
+        public ChanceTable(string name, ChanceResult[] table)
         {
             _table = table;
             _name = name;
