@@ -34,6 +34,17 @@ public class TableStore
         return names;
     }
 
+    /// <returns>The table names in a printable format</returns>
+    public string PrintTableNames()
+    {
+        string names = "";
+        foreach (ChanceTable table in _chanceTables)
+        {
+            names += table.Name + ", ";
+        }
+        return names;
+    }
+
     /*public void ImportProfile(string root)
     {
         foreach(string json in FileWorker.RecursiveImport(root, "json"))
@@ -49,5 +60,18 @@ public class TableStore
     public void ImportTable(string file)
     {
         _chanceTables.Add(ChanceTable.FromJson(FileWorker.ReadFile(file)));
+    }
+
+    /// <summary>
+    /// Creates and adds ChanceTables based on json retrieved from files which fit the given filter
+    /// </summary>
+    /// <param name="root">Where to start looking for files</param>
+    /// <param name="filter">Filters on which files to look for</param>
+    public void MassImportTable(string root, string filter)
+    {
+        foreach (string json in FileWorker.RecursiveImport(root, filter))
+        { 
+            _chanceTables.Add(ChanceTable.FromJson(json));
+        }
     }
 }

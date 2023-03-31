@@ -73,109 +73,108 @@ public class Dice {
         return table.GetResult(Roll(table.TotalChance));
     }
 
-        /// <summary>
-        /// Processes a string so it can be used by the Dice class to generate a random number. Examples include:
-        /// "1": Will return 1;
-        /// "1d6": Will return the result of rolling a single six sided dice.
-        /// "1d6/2": Will get the result of rolling a single six sided dice and divide it by two. Other operations can be performed and are read left to right.
-        /// </summary>
-        /// <param name="s">The string to process.</param>
-        /// <returns>The randomly generated value from the commands passed through the string.</returns>
-        public int ParseString(string s) {
-            string[] NumArray = s.Split(new char[] { 'd', '+', '/', '-', '*' });
-            if (NumArray.Length == 1) return Int32.Parse(NumArray[0]);
-            string operators = ExtensionMethods.StripNumbers(s);
-            int holder = 0;
-            for (int i = 0; i < operators.Length; i++) {
-                switch (operators[i]) {
-                    case 'd':
-                        holder += RollMany(Int32.Parse(NumArray[i]), Int32.Parse(NumArray[i + 1]));
-                        break;
-                    case '+':
-                        holder += Int32.Parse(NumArray[i + 1]);
-                        break;
-                    case '-':
-                        holder -= Int32.Parse(NumArray[i + 1]);
-                        break;
-                    case '*':
-                        holder *= Int32.Parse(NumArray[i + 1]);
-                        break;
-                    case '/':
-                        holder /= Int32.Parse(NumArray[i + 1]);
-                        break;
-                }
+    /// <summary>
+    /// Processes a string so it can be used by the Dice class to generate a random number. Examples include:
+    /// "1": Will return 1;
+    /// "1d6": Will return the result of rolling a single six sided dice.
+    /// "1d6/2": Will get the result of rolling a single six sided dice and divide it by two. Other operations can be performed and are read left to right.
+    /// </summary>
+    /// <param name="s">The string to process.</param>
+    /// <returns>The randomly generated value from the commands passed through the string.</returns>
+    public int ParseString(string s) {
+        string[] NumArray = s.Split(new char[] { 'd', '+', '/', '-', '*' });
+        if (NumArray.Length == 1) return Int32.Parse(NumArray[0]);
+        string operators = ExtensionMethods.StripNumbers(s);
+        int holder = 0;
+        for (int i = 0; i < operators.Length; i++) {
+            switch (operators[i]) {
+                case 'd':
+                    holder += RollMany(Int32.Parse(NumArray[i]), Int32.Parse(NumArray[i + 1]));
+                    break;
+                case '+':
+                    holder += Int32.Parse(NumArray[i + 1]);
+                    break;
+                case '-':
+                    holder -= Int32.Parse(NumArray[i + 1]);
+                    break;
+                case '*':
+                    holder *= Int32.Parse(NumArray[i + 1]);
+                    break;
+                case '/':
+                    holder /= Int32.Parse(NumArray[i + 1]);
+                    break;
             }
-            return holder;
         }
+        return holder;
+    }
 
-        /// <summary>
-        /// Gets the minimum possible result from a passed string
-        /// </summary>
-        /// <param name="s">String to parse</param>
-        /// <returns>Minimum possible result from rolling on a passed string</returns>
-        public static int ParseStringMin(string s)
+    /// <summary>
+    /// Gets the minimum possible result from a passed string
+    /// </summary>
+    /// <param name="s">String to parse</param>
+    /// <returns>Minimum possible result from rolling on a passed string</returns>
+    public static int ParseStringMin(string s)
+    {
+        string[] NumArray = s.Split(new char[] { 'd', '+', '/', '-', '*' });
+        if (NumArray.Length == 1) return Int32.Parse(NumArray[0]);
+        string operators = ExtensionMethods.StripNumbers(s);
+        int holder = 0;
+        for (int i = 0; i < operators.Length; i++)
         {
-            string[] NumArray = s.Split(new char[] { 'd', '+', '/', '-', '*' });
-            if (NumArray.Length == 1) return Int32.Parse(NumArray[0]);
-            string operators = ExtensionMethods.StripNumbers(s);
-            int holder = 0;
-            for (int i = 0; i < operators.Length; i++)
+            switch (operators[i])
             {
-                switch (operators[i])
-                {
-                    case 'd':
-                        holder += Int32.Parse(NumArray[i]);
-                        break;
-                    case '+':
-                        holder += Int32.Parse(NumArray[i + 1]);
-                        break;
-                    case '-':
-                        holder -= Int32.Parse(NumArray[i + 1]);
-                        break;
-                    case '*':
-                        holder *= Int32.Parse(NumArray[i + 1]);
-                        break;
-                    case '/':
-                        holder /= Int32.Parse(NumArray[i + 1]);
-                        break;
-                }
+                case 'd':
+                    holder += Int32.Parse(NumArray[i]);
+                    break;
+                case '+':
+                    holder += Int32.Parse(NumArray[i + 1]);
+                    break;
+                case '-':
+                    holder -= Int32.Parse(NumArray[i + 1]);
+                    break;
+                case '*':
+                    holder *= Int32.Parse(NumArray[i + 1]);
+                    break;
+                case '/':
+                    holder /= Int32.Parse(NumArray[i + 1]);
+                    break;
             }
-            return holder;
         }
+        return holder;
+    }
 
-        /// <summary>
-        /// Gets the maximum possible result from a passed string
-        /// </summary>
-        /// <param name="s">String to parse</param>
-        /// <returns>Maximum possible result from rolling on a passed string</returns>
-        public static int ParseStringMax(string s)
+    /// <summary>
+    /// Gets the maximum possible result from a passed string
+    /// </summary>
+    /// <param name="s">String to parse</param>
+    /// <returns>Maximum possible result from rolling on a passed string</returns>
+    public static int ParseStringMax(string s)
+    {
+        string[] NumArray = s.Split(new char[] { 'd', '+', '/', '-', '*' });
+        if (NumArray.Length == 1) return Int32.Parse(NumArray[0]);
+        string operators = ExtensionMethods.StripNumbers(s);
+        int holder = 0;
+        for (int i = 0; i < operators.Length; i++)
         {
-            string[] NumArray = s.Split(new char[] { 'd', '+', '/', '-', '*' });
-            if (NumArray.Length == 1) return Int32.Parse(NumArray[0]);
-            string operators = ExtensionMethods.StripNumbers(s);
-            int holder = 0;
-            for (int i = 0; i < operators.Length; i++)
+            switch (operators[i])
             {
-                switch (operators[i])
-                {
-                    case 'd':
-                        holder += (Int32.Parse(NumArray[i]) * Int32.Parse(NumArray[i + 1]));
-                        break;
-                    case '+':
-                        holder += Int32.Parse(NumArray[i + 1]);
-                        break;
-                    case '-':
-                        holder -= Int32.Parse(NumArray[i + 1]);
-                        break;
-                    case '*':
-                        holder *= Int32.Parse(NumArray[i + 1]);
-                        break;
-                    case '/':
-                        holder /= Int32.Parse(NumArray[i + 1]);
-                        break;
-                }
+                case 'd':
+                    holder += (Int32.Parse(NumArray[i]) * Int32.Parse(NumArray[i + 1]));
+                    break;
+                case '+':
+                    holder += Int32.Parse(NumArray[i + 1]);
+                    break;
+                case '-':
+                    holder -= Int32.Parse(NumArray[i + 1]);
+                    break;
+                case '*':
+                    holder *= Int32.Parse(NumArray[i + 1]);
+                    break;
+                case '/':
+                    holder /= Int32.Parse(NumArray[i + 1]);
+                    break;
             }
-            return holder;
         }
+        return holder;
     }
 }
