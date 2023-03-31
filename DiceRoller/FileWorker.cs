@@ -33,7 +33,6 @@ public static class FileWorker
         List<string> holder = new List<string>();
         foreach (string file in Directory.EnumerateFiles(root, filter, SearchOption.AllDirectories))
         {
-            Console.WriteLine(file);
             holder.Add(ReadFile(file));
         }
         return holder;
