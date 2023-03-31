@@ -26,13 +26,14 @@ public static class FileWorker
     /// Returns the contents of all files below a certain location which has a certain defined extension.
     /// </summary>
     /// <param name="root">The folder to start importing from</param>
-    /// <param name="extension">The extension which will be searched for</param>
+    /// <param name="filter">The filter applied to the search</param>
     /// <returns>A list with the contents of all files found</returns>
-    public static List<string> RecursiveImport(string root, string extension)
+    public static List<string> RecursiveImport(string root, string filter)
     {
         List<string> holder = new List<string>();
-        foreach (string file in Directory.EnumerateFiles(root, "*." + extension, SearchOption.AllDirectories))
+        foreach (string file in Directory.EnumerateFiles(root, filter, SearchOption.AllDirectories))
         {
+            Console.WriteLine(file);
             holder.Add(ReadFile(file));
         }
         return holder;
