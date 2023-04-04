@@ -47,6 +47,7 @@ public class ChanceTable
     /// <returns>The string of the associated ChanceResult object which was selected.</returns>
     public string GetResult(int roll)
     {
+        if (_totalChance == 1) return _table[0].Result;
         int comp = 0;
         foreach (ChanceResult result in _table)
         {
